@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Yönetim · 1.42 Etliekmek</title>
+<link rel="icon" type="image/png" href="/img/logo.png">
+<style>
+:root{--bg:#0d1f17;--ink:#efe8d8;--mute:#9db5a6;--teal:#4cc77a;--amber:#f0a93e;--line:#2b4a38;--chip:#1a3727}
+@media (prefers-color-scheme:light){:root{--bg:#eff4ee;--ink:#14221a;--mute:#4d6656;--teal:#1b7a43;--amber:#a65a08;--line:#b8cdbc;--chip:#d4e4d6}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;padding:calc(env(safe-area-inset-top,0px) + 14px) 14px calc(env(safe-area-inset-bottom,0px) + 28px)}
+h3{font-weight:700;margin:0;font-size:1.3rem}
+.ap{max-width:760px;margin:0 auto}
+.ap.lg{max-width:340px;display:flex;flex-direction:column;gap:10px;margin-top:12vh}
+.ah{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2}
+input{width:100%;min-width:0;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);font:inherit}
+button{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:none;color:var(--ink);font:inherit;cursor:pointer}
+button.pr{background:var(--teal);color:var(--bg);border-color:var(--teal);font-weight:700}
+button:disabled{opacity:.6;cursor:wait}
+input:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.er{color:var(--amber);min-height:1.4em;margin:4px 0}
+fieldset{border:1px solid var(--line);border-radius:14px;margin:14px 0;padding:12px}
+.sh{display:grid;gap:6px;margin-bottom:8px}
+.ir{display:grid;grid-template-columns:1fr 1fr 74px 74px;gap:6px;padding:8px 0;border-top:1px solid var(--line)}
+.ir .c2{grid-column:span 2}
+.ir2{display:grid;gap:6px;margin:8px 0}
+details{margin:8px 0;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+summary{cursor:pointer}
+.mute{color:var(--mute);font-size:.9rem}
+a{color:var(--teal)}
+@media (max-width:480px){.ir{grid-template-columns:1fr 1fr}.ir .c2{grid-column:span 2}}
+</style></head>
+<body>
+<div id="app"></div>
+<script>
+const app=document.getElementById('app');
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const at=(f,si,ii)=>'data-f="'+f+'" data-si="'+si+'" data-ii="'+ii+'"';
+let D=null,dirty=false;
+
+async function call(method,url,body){
+  const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,credentials:'same-origin'});
+  let j={};try{j=await r.json()}catch(_){}
+  if(!r.ok){const e=new Error(j.error||('Hata '+r.status));e.status=r.status;throw e}
+  return j;
+}
+const say=t=>{const n=document.getElementById('st');if(n)n.textContent=t};
+
+function loadMenu(){
+  return new Promise((res,rej)=>{
+    delete window.MENU;
+    const s=document.createElement('script');s.src='/menu.js?t='+Date.now();
+    s.onload=()=>{D=JSON.parse(JSON.stringify(window.MENU||[]));
+      D.forEach(c=>c[3].forEach((r,i)=>{if(r[5]===undefined){r[3]=r[3]||0;r[4]=r[4]||'';r[5]=''}}));
+      res()};
+    s.onerror=()=>rej(new Error('Menü yüklenemedi'));
+    document.head.appendChild(s);
+  });
+}
+
+function login(){
+  app.innerHTML='<form class="ap lg" id="lf"><h3>Yönetici girişi</h3><input id="lu" placeholder="Kullanıcı adı" autocomplete="username" required><input id="lp" type="password" placeholder="Şifre" autocomplete="current-password" required><p class="er" id="le"></p><button class="pr" id="lb">Giriş</button><a href="/">← Menüye dön</a></form>';
+  document.getElementById('lu').focus();
+}
+
+async function dash(keepScroll){
+  const y=scrollY;
+  app.innerHTML='<div class="ap"><div class="ah"><h3>Yönetim paneli</h3><span><button class="pr" id="sv" type="button">Kaydet ve yayınla</button> <button type="button" id="lo">Çıkış</button></span></div><p class="er" id="st"></p>'
+  +'<p class="mute"><a href="/" target="_blank" rel="noopener">Menüyü aç</a> · Değişiklikler “Kaydet ve yayınla”ya basınca yayına girer.</p>'
+  +'<details><summary>Kullanıcı adı ve şifre</summary><div class="ir2"><input id="cp" type="password" placeholder="Mevcut şifre" autocomplete="current-password"><input id="nu" placeholder="Yeni kullanıcı adı (boş bırakılırsa aynı)" autocomplete="off"><input id="np" type="password" placeholder="Yeni şifre (en az 8 karakter)" autocomplete="new-password"><button type="button" id="ap">Uygula</button></div></details>'
+  +D.map((s,si)=>'<fieldset><div class="sh"><input '+at('t',si,0)+' value="'+esc(s[1])+'" aria-label="Kategori adı"><input '+at('s',si,0)+' value="'+esc(s[2])+'" placeholder="Alt başlık" aria-label="Alt başlık"></div>'
+  +s[3].map((r,ii)=>'<div class="ir"><input class="c2" '+at(0,si,ii)+' value="'+esc(r[0])+'" aria-label="Ürün adı"><input type="number" min="0" '+at(2,si,ii)+' value="'+(+r[2]||0)+'" aria-label="Fiyat TL"><input type="number" min="0" '+at(3,si,ii)+' value="'+(+r[3]||0)+'" aria-label="Kalori"><input class="c2" '+at(1,si,ii)+' value="'+esc(r[1])+'" placeholder="Açıklama" aria-label="Açıklama"><input '+at(4,si,ii)+' value="'+esc(r[4])+'" placeholder="Etiket" aria-label="Etiket"><button type="button" data-del="'+si+','+ii+'" aria-label="Ürünü sil">✕</button></div>').join('')
+  +'<button type="button" data-add="'+si+'">+ Ürün ekle</button></fieldset>').join('')
+  +'<p><button type="button" id="rs">Varsayılan menüye dön</button></p></div>';
+  if(keepScroll)scrollTo(0,y);
+}
+
+async function boot(){
+  try{await call('GET','/api/me');await loadMenu();dash()}
+  catch(e){if(e.status===401)login();else{app.innerHTML='<div class="ap lg"><p class="er">'+esc(e.message)+'</p></div>'}}
+}
+
+app.addEventListener('submit',async e=>{
+  if(e.target.id!=='lf')return;e.preventDefault();
+  const er=document.getElementById('le'),b=document.getElementById('lb');er.textContent='';b.disabled=true;
+  try{await call('POST','/api/login',{user:document.getElementById('lu').value.trim(),pass:document.getElementById('lp').value});await loadMenu();dash()}
+  catch(err){er.textContent=err.message;b.disabled=false}
+});
+
+app.addEventListener('input',e=>{
+  const t=e.target,f=t.dataset.f;if(!f)return;dirty=true;
+  const s=D[+t.dataset.si];
+  if(f==='t')s[1]=t.value;else if(f==='s')s[2]=t.value;
+  else{const j=+f;s[3][+t.dataset.ii][j]=(j===2||j===3)?(+t.value||0):t.value}
+});
+
+app.addEventListener('click',async e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.id==='lo'){try{await call('POST','/api/logout',{})}catch(_){}location.reload()}
+  else if(b.dataset.add!=null){D[+b.dataset.add][3].push(['Yeni ürün','',0,0,'','']);dirty=true;dash(true)}
+  else if(b.dataset.del){
+    if(b.dataset.arm){const[a,c]=b.dataset.del.split(',');D[+a][3].splice(+c,1);dirty=true;dash(true)}
+    else{b.dataset.arm=1;b.textContent='Sil?';setTimeout(()=>{b.dataset.arm='';b.textContent='✕'},3000)}
+  }
+  else if(b.id==='sv'){
+    b.disabled=true;say('Yayınlanıyor…');
+    try{await call('PUT','/api/menu',{menu:D});dirty=false;say('Yayınlandı. Menü birkaç saniye içinde güncellenir.')}
+    catch(err){if(err.status===401){say('Oturum süresi doldu, yeniden giriş yapın.');setTimeout(login,1200)}else say('Hata: '+err.message)}
+    b.disabled=false;
+  }
+  else if(b.id==='ap'){
+    try{
+      const r=await call('POST','/api/credentials',{current:document.getElementById('cp').value,newUser:document.getElementById('nu').value,newPassword:document.getElementById('np').value});
+      say('Giriş bilgileri güncellendi (kullanıcı: '+r.user+').');
+      ['cp','nu','np'].forEach(i=>document.getElementById(i).value='');
+    }catch(err){say('Hata: '+err.message)}
+  }
+  else if(b.id==='rs'){
+    if(b.dataset.arm){try{await call('POST','/api/menu/reset',{});await loadMenu();dirty=false;dash();say('Varsayılan menüye dönüldü.')}catch(err){say('Hata: '+err.message)}}
+    else{b.dataset.arm=1;b.textContent='Emin misin? Tekrar bas';setTimeout(()=>{b.dataset.arm='';b.textContent='Varsayılan menüye dön'},4000)}
+  }
+});
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+boot();
+</script>
+</body></html>

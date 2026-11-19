@@ -1,0 +1,14 @@
+{
+  "name": "etliekmek-menu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "1.42 Etliekmek dijital menü - Cloudflare Workers",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.45.0"
+  }
+}

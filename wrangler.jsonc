@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "etliekmek-menu",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Menü verisini saklamak için KV. id yazmazsanız wrangler deploy sırasında otomatik oluşturulur.
+  "kv_namespaces": [{ "binding": "MENU_KV" }],
+  "observability": { "enabled": true }
+}

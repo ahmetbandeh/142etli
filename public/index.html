@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.42 Etliekmek · Menü</title>
+<meta name="description" content="1.42 Etliekmek Tepebaşı şubesi menüsü: Konya etli ekmek, pide, kebap, tandır, kahvaltı ve tatlılar.">
+<meta name="theme-color" content="#0d1f17">
+<link rel="icon" type="image/png" href="/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1f17;--bg2:#14301f;--ink:#efe8d8;--mute:#9db5a6;--teal:#4cc77a;--amber:#f0a93e;--line:#2b4a38;--chip:#1a3727;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1f17}}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eff4ee;--bg2:#e0ebdf;--ink:#14221a;--mute:#4d6656;--teal:#1b7a43;--amber:#a65a08;--line:#b8cdbc;--chip:#d4e4d6}}
+:root[data-theme="light"]{--bg:#eff4ee;--bg2:#e0ebdf;--ink:#14221a;--mute:#4d6656;--teal:#1b7a43;--amber:#a65a08;--line:#b8cdbc;--chip:#d4e4d6}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,sans-serif}
+h1,h2{font-family:"Young Serif",Georgia,serif;font-weight:400;margin:0}
+.hero{position:relative;overflow:hidden;text-align:center;padding:36px 20px 28px;background:radial-gradient(ellipse at 50% 38%,rgba(76,199,122,.28),transparent 62%),linear-gradient(var(--bg2),var(--bg))}
+.logo{width:min(230px,60vw);height:auto;display:block;margin:0 auto 10px;filter:drop-shadow(0 0 24px rgba(76,199,122,.45))}
+.hero h1{font-size:clamp(2.4rem,9vw,4.2rem);line-height:1;letter-spacing:-.01em}
+.hero p{max-width:30ch;margin:14px auto 0;color:var(--mute);font-size:1.05rem}
+.hero .hl{color:var(--amber);font-family:"Young Serif",Georgia,serif;font-size:1.15rem;max-width:none;margin-top:18px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px}
+.bar::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:-1}
+.bar input{width:100%;max-width:640px;display:block;margin:0 auto 8px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--ink);font:inherit}
+.bar input:focus-visible,.chips a:focus-visible,.cta a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:900px;margin:0 auto}
+.chips a{flex:none;white-space:nowrap;padding:6px 14px;border-radius:99px;background:var(--chip);color:var(--ink);text-decoration:none;font-size:.92rem;border:1px solid transparent}
+.chips a.on{background:var(--teal);color:var(--bg);font-weight:700}
+main{max-width:720px;margin:0 auto;padding:8px 18px 40px}
+section{padding-top:30px}
+section h2{font-size:1.9rem;color:var(--teal)}
+section .sub{color:var(--mute);margin:2px 0 12px;font-style:italic}
+.r{display:flex;align-items:center;padding:9px 0}
+.t{cursor:zoom-in;width:92px;height:69px;flex:none;object-fit:cover;border-radius:12px;margin-right:12px;background:#f6efe0}
+.n{font-weight:500;min-width:0}
+.n small{display:block;color:var(--mute);font-weight:400;font-size:.85rem;max-width:44ch}
+.l{flex:1;min-width:14px;border-bottom:2px dotted var(--line);margin:0 8px;align-self:center}
+.p{font-family:"Young Serif",Georgia,serif;color:var(--amber);font-size:1.15rem;white-space:nowrap;text-align:right}
+.p small{display:block;font:400 .75rem Figtree,sans-serif;color:var(--mute)}
+.tag{font-size:.72rem;color:var(--teal);border:1px solid var(--teal);border-radius:6px;padding:0 5px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.empty{display:none;text-align:center;color:var(--mute);padding:40px 0}
+.cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:34px 0 10px}
+.cta a{padding:10px 18px;border-radius:12px;background:var(--teal);color:var(--bg);font-weight:700;text-decoration:none}
+.cta a.o{background:none;color:var(--ink);border:1px solid var(--line)}
+footer{max-width:720px;margin:0 auto;padding:0 18px 36px;color:var(--mute);font-size:.82rem;text-align:center}
+footer p{margin:6px 0}
+[hidden]{display:none!important}
+#al{color:var(--mute);font-size:.8rem}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(6,18,12,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px);cursor:zoom-out}
+#lb img{max-width:100%;max-height:76vh;border-radius:14px;background:#f6efe0}
+#lb p{margin:0;color:#efe8d8;font:400 1.25rem "Young Serif",Georgia,serif;text-align:center}
+#lb p span{display:block;margin-top:4px;color:#f0a93e;font-size:1.4rem}
+#lb button{position:absolute;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;width:44px;height:44px;border-radius:50%;border:1px solid #2b4a38;background:#14301f;color:#efe8d8;font-size:1.6rem;line-height:1;cursor:pointer}
+#lb button:focus-visible{outline:2px solid #4cc77a}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="hero">
+<img class="logo" src="/img/logo.png" width="420" height="303" alt="1.42 Etliekmek logosu">
+<h1>Menü</h1>
+<p>Mevlana’nın diyarından, Konya’nın eşsiz sofrasından lezzetler.</p>
+<p class="hl">Afiyet olsun.</p>
+</header>
+<nav class="bar" aria-label="Menü kategorileri">
+<input id="q" type="search" placeholder="Menüde ara: kavurma, künefe, ayran…" aria-label="Menüde ara">
+<div class="chips" id="chips"></div>
+</nav>
+<main id="m"></main>
+<div id="lb" hidden="" role="dialog" aria-modal="true" aria-label="Büyük fotoğraf"><button type="button" aria-label="Kapat">×</button><img alt=""><p></p></div>
+<p class="empty" id="e">Sonuç yok. Başka bir yemek adı dene.</p>
+<div class="cta">
+<a href="https://wa.me/905436554274">WhatsApp: 0543 655 4274</a>
+<a class="o" href="https://www.instagram.com/1.42_etliekmek_tepebasi_subesi">Instagram</a>
+</div>
+<footer>
+<p>Paket siparişi için Yemeksepeti ve Trendyol Yemek’te de bulabilirsiniz.</p>
+<p>Fiyatlarımıza KDV dahildir. Masaya meze ve garnitür ikramımızdır.</p>
+<p>Fotoğraflar temsilidir, sunumlar farklılık gösterebilir. Kalori ve alerjen bilgileri yaklaşık değerlerdir ve tıbbi tavsiye yerine geçmez. Çölyak veya ciddi gıda alerjiniz varsa lütfen servis personelini bilgilendirin.</p>
+<p><a id="al" href="/admin">Yönetici girişi</a></p>
+</footer>
+<script src="/menu.js"></script>
+<script>
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D=window.MENU,HAS=new Set(window.MENU_IMAGES);
+D.forEach(s=>s[3].forEach((r,i)=>{if(r[5]===undefined){r[3]=r[3]||0;r[4]=r[4]||'';r[5]=s[0]+i}}));
+const f=n=>String(n).replace(/\B(?=(\d{3})+$)/g,'.');
+const m=document.getElementById('m'),ch=document.getElementById('chips');
+D.forEach(([id,t,s,it])=>{
+ const a=document.createElement('a');a.href='#'+id;a.textContent=t;a.dataset.id=id;ch.appendChild(a);
+ const sec=document.createElement('section');sec.id=id;
+ sec.innerHTML='<h2>'+esc(t)+'</h2>'+(s?'<p class="sub">'+esc(s)+'</p>':'')+it.map(r=>{const[n,sub,p,k,tag,key]=[esc(r[0]),esc(r[1]),r[2],r[3],esc(r[4]),r[5]];return '<div class="r" data-s="'+(n+' '+sub).toLocaleLowerCase('tr')+'">'+(HAS.has(key)?'<img class="t" loading="lazy" alt="'+n+'" data-k="'+key+'" tabindex="0" role="button" src="/img/thumb/'+key+'.jpg">':'')+'<div class="n">'+n+(tag?'<span class="tag">'+tag+'</span>':'')+(sub?'<small>'+sub+'</small>':'')+'</div><span class="l"></span><div class="p">'+(p?f(p)+' TL':'–')+(k?'<small>'+k+' kcal</small>':'')+'</div></div>'}).join('');
+ m.appendChild(sec);
+});
+const q=document.getElementById('q'),e=document.getElementById('e');
+q.addEventListener('input',()=>{
+ const v=q.value.trim().toLocaleLowerCase('tr');let any=false;
+ m.querySelectorAll('section').forEach(s=>{
+  let c=0;s.querySelectorAll('.r').forEach(r=>{const ok=!v||r.dataset.s.includes(v);r.style.display=ok?'':'none';if(ok)c++});
+  s.style.display=c?'':'none';if(c)any=true});
+ e.style.display=any?'none':'block';
+});
+const bar=document.querySelector('.bar'),secs=[...m.querySelectorAll('section')],links=[...ch.querySelectorAll('a')];
+let cur='',lock=0,tick=0;
+function mark(id){if(id===cur)return;cur=id;links.forEach(a=>{const on=a.dataset.id===id;a.classList.toggle('on',on);if(on)ch.scrollTo({left:a.getBoundingClientRect().left-ch.getBoundingClientRect().left+ch.scrollLeft-(ch.clientWidth-a.offsetWidth)/2,behavior:'smooth'})})}
+function spy(){if(Date.now()<lock)return;const vis=secs.filter(s=>s.style.display!=='none');if(!vis.length)return;const y=bar.offsetHeight+24;let id=vis[0].id;for(const s of vis){if(s.getBoundingClientRect().top<=y)id=s.id}if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)id=vis[vis.length-1].id;mark(id)}
+addEventListener('scroll',()=>{if(!tick){tick=1;requestAnimationFrame(()=>{tick=0;spy()})}},{passive:true});
+q.addEventListener('input',spy);
+ch.addEventListener('click',ev=>{const a=ev.target.closest('a');if(!a)return;ev.preventDefault();const s=document.getElementById(a.dataset.id);if(!s)return;if(s.style.display==='none'){q.value='';q.dispatchEvent(new Event('input'))}const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;const top=s.getBoundingClientRect().top+scrollY-bar.offsetHeight;lock=Date.now()+1000;mark(a.dataset.id);scrollTo({top:Math.max(0,top),behavior:reduce?'auto':'smooth'});setTimeout(()=>{lock=0;spy()},1050)});
+spy();
+const lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');let last=null;
+function openLb(t){last=t;li.src='/img/large/'+t.dataset.k+'.jpg';li.alt=t.alt;lp.textContent=t.alt;const pe=t.closest('.r').querySelector('.p');if(pe){const s=document.createElement('span');s.textContent=pe.firstChild.textContent;lp.appendChild(s)}lb.hidden=false;document.documentElement.style.overflow='hidden';lb.querySelector('button').focus()}
+function closeLb(){lb.hidden=true;li.removeAttribute('src');document.documentElement.style.overflow='';if(last)last.focus()}
+m.addEventListener('click',e=>{const t=e.target.closest('.t');if(t)openLb(t)});
+m.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('t')){e.preventDefault();openLb(e.target)}});
+lb.addEventListener('click',closeLb);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)closeLb()});
+
+</script></body></html>
